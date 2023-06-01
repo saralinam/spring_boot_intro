@@ -175,4 +175,24 @@ public class StudentController {
         return "Welcome to Student Controller";
     }
 
+    //method to give us number of student
+    @GetMapping("/getStudentNumber") //http://localhost:8080/students/getStudentNumber"
+    public String getStudentNumber(){
+        String numOfStudent = studentService.getStudentCount();
+        return "Total number of registered students: "+numOfStudent;
+    }
+
+    @GetMapping("/getAllStudentsFromFuncation")//http://localhost:8080/students/getAllStudentsFromFuncation
+
+    public List<Student> getAllStudentsFromFunction(){
+        List<Student> student = studentService.retriveAllStudents();
+        return student;
+    }
+
+    @PostMapping("/getStudentFromFunction") //localhost:8080/students/getStudentFromFunction?id=1
+    public Student getStudentFromFunction(@RequestParam("id") Long id){
+        Student student = studentService.getStudentByIdFromFunction(id);
+        return student;
+    }
+
 }

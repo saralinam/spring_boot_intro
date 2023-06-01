@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -106,6 +107,21 @@ public class StudentService {
                 ()->new ResourceNotFoundException("Student with id "+id+" is not found"));
     }
 
+    public String getStudentCount() {
+        return studentRepository.getStudentCount();
+    }
+
+    @Transactional(readOnly = true)
+    public List<Student> retriveAllStudents() {
+        return studentRepository.get_all_students();
+
+
+    }
+
+    @Transactional(readOnly = true)
+    public Student getStudentByIdFromFunction(Long id) {
+        return studentRepository.getStudentByIdFromFunction(id);
+    }
 
     //1.check email exist or not
     //2. if true ,if the email in Db belongs to same student whose being updated
